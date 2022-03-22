@@ -1,40 +1,52 @@
 let playerScore = 0;
 let computerScore = 0;
 
-let x = Math.random()*3;
-function computerPlay(){
-    if (x<1) {return ('Paper');
-}   else if (x<2) {return ('Rock');
-}   else {return ('Scissors');
-}
-}
+function computerPlay() {
+        let computerRandomChoices = ['Rock', 'Paper', 'Scissors'];
+        let getRandomChoices = Math.floor(Math.random() * computerRandomChoices.length)
+        return computerRandomChoices[getRandomChoices];
+    }
 
 function playRound(playerSelection, computerSelection){
-        console.log (`You selected ${playerSelection}`); // Tutaj musialem uzyc `` zeby to zadzialalo
-        console.log (`Computer selected ${computerSelection}`);
+        document.querySelector('.player-selection').textContent=(`You selected ${playerSelection}`); // Tutaj musialem uzyc `` zeby to zadzialalo
+        document.querySelector('.computer-selection').textContent=(`Computer selected ${computerSelection}`);
+        document.querySelector('.player-score').textContent="Player points: "+playerScore;
+        document.querySelector('.comp-score').textContent="Computer points: "+computerScore;   
+
         if ((playerSelection=='Paper') && (computerSelection=='Rock')){
-                console.log ('You won!')   
+                playerScore++
+                document.querySelector('.round-result').textContent=('You won the round!')  
+                document.querySelector('.player-score').textContent="Player points: "+playerScore;
         }
         else if ((playerSelection=='Paper') && (computerSelection=='Scissors')){
-                console.log ('You lose.')   
+                computerScore++
+                document.querySelector('.round-result').textContent=('You lose the round!')
+                document.querySelector('.comp-score').textContent="Computer points: "+computerScore;       
         }
         else if((playerSelection=='Scissors') && (computerSelection=='Rock')){
-                console.log ('You lose.')   
+                computerScore++
+                document.querySelector('.round-result').textContent=('You lose the round!')
+                document.querySelector('.comp-score').textContent="Computer points: "+computerScore;     
         }
         else if ((playerSelection=='Scissors')&&(computerSelection=='Paper')){
-                console.log ('You won.')   
+                playerScore++
+                document.querySelector('.round-result').textContent=('You won the round!');
+                document.querySelector('.player-score').textContent="Player points: "+playerScore;  
         }
         else if((playerSelection=='Rock') && (computerSelection=='Paper')){
-                console.log ('You lose.')   
+                computerScore++
+                document.querySelector('.round-result').textContent=('You lose the round!')
+                document.querySelector('.comp-score').textContent="Computer points: "+computerScore;    
         }
         else if ((playerSelection=='Rock') && (computerSelection=='Scissors')){
-                console.log ('You won.')   
+                playerScore++
+                document.querySelector('.round-result').textContent=('You won the round!');
+                document.querySelector('.player-score').textContent="Player points: "+playerScore; 
         }
         else {
-                console.log ('Tie!')
+                document.querySelector('.round-result').textContent=('Tie!')
         }
 }
-
 
 const Paper= document.querySelector('.Paper')
 const Rock= document.querySelector('.Rock')
@@ -52,7 +64,21 @@ function choseScissors(){
 
 function game(playerChoice){
         playRound(playerChoice, computerPlay())
+        if (playerScore==5){
+                document.querySelector('.final-result').textContent='You won the Match'
+        }
+        else if (computerScore==5){
+                document.querySelector('final-result').textContent='You lose the Match'
+        }
 }
+
+
+
+
+
+
+
+
 
 Paper.addEventListener('click',chosePaper)
 
